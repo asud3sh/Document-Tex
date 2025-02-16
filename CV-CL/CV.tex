@@ -1,0 +1,447 @@
+%--------------------------------------------------------------------------------------%
+%                            _         ___,        _
+%   ()           |          | |       /   |       | |
+%   /\         __|   _   ,  | |      |    |   __  | |     __,   ,_          __,
+%  /  \|   |  /  |  |/  / \_|/ \     |    |  /    |/ \   /  |  /  |  |   | /  |
+% /(__/ \_/|_/\_/|_/|__/ \/ |   |_/   \__/\_/\___/|   |_/\_/|_/   |_/ \_/|/\_/|_/
+%                                                                       /|
+%                                                                       \|
+%  @Mnpr/Documents-Tex ( Curriculum vitae )
+%---------------------------------------------------------------------------------------%
+
+%============================================================================%
+%
+%	DOCUMENT DEFINITION
+%
+%============================================================================%
+
+\documentclass[10pt,A4]{article}
+
+%----------------------------------------------------------------------------------------
+%	ENCODING
+%----------------------------------------------------------------------------------------
+
+\usepackage[utf8]{inputenc}
+
+%----------------------------------------------------------------------------------------
+%	LOGIC
+%----------------------------------------------------------------------------------------
+
+% provides \isempty test
+\usepackage{xifthen}
+
+%----------------------------------------------------------------------------------------
+%	FONT
+%----------------------------------------------------------------------------------------
+
+% some tex-live fonts
+
+\usepackage[defaultsans]{droidsans}
+%\usepackage[default]{comfortaa}
+%\usepackage{cmbright}
+%\usepackage[default]{raleway}
+%\usepackage{fetamont}
+%\usepackage[default]{gillius}
+%\usepackage[light,math]{iwona}
+%\usepackage[thin]{roboto}
+
+% set font default
+\renewcommand*\familydefault{\sfdefault}
+\usepackage[T1]{fontenc}
+
+% more font size definitions
+\usepackage{moresize}
+
+
+%----------------------------------------------------------------------------------------
+%	PAGE LAYOUT  DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+%debug page outer frames
+%\usepackage{showframe}
+
+
+%define page styles using geometry
+\usepackage[a4paper]{geometry}
+
+% for example, change the margins to 2 inches all round
+\geometry{top=1.75cm, bottom=-.6cm, left=1.5cm, right=1.5cm}
+
+%use customized header
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+%less space between header and content
+\setlength{\headheight}{-5pt}
+
+
+%customize entries left, center and right
+\lhead{}
+\chead{
+	\small{ \textcolor{sectcol}{\textbf{sudesh.contact@gmail.com}}  $\cdot$ +977 9765624237 $\cdot$ Pokhara-11, 33700, Gandaki, Nepal }}
+\rhead{}
+
+
+%indentation is zero
+\setlength{\parindent}{0mm}
+
+%----------------------------------------------------------------------------------------
+%	TABLE /ARRAY DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+%for layouting tables
+\usepackage{multicol}
+\usepackage{multirow}
+
+%extended aligning of tabular cells
+\usepackage{array}
+
+\newcolumntype{x}[1]{%
+>{\raggedleft\hspace{0pt}}p{#1}}%
+
+
+%----------------------------------------------------------------------------------------
+%	GRAPHICS DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+%for header image
+\usepackage{graphicx}
+
+%for floating figures
+\usepackage{wrapfig}
+\usepackage{float}
+%\floatstyle{boxed}
+%\restylefloat{figure}
+
+%for drawing graphics
+\usepackage{tikz}
+\usetikzlibrary{shapes, backgrounds,mindmap, trees}
+
+
+%----------------------------------------------------------------------------------------
+%	Color DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+\usepackage{color}
+
+%accent color
+\definecolor{sectcol}{RGB}{129,161,193}
+%\definecolor{sectcol}{RGB}{0,0,0}
+
+%dark background color
+%\definecolor{bgcol}{RGB}{76,86,106}
+\definecolor{bgcol}{RGB}{0,0,0}
+
+%light background / accent color
+\definecolor{softcol}{RGB}{236,239,244}
+%\definecolor{softcol}{RGB}{0,0,0}
+
+%============================================================================%
+%
+%	DEFINITIONS
+%
+%============================================================================%
+
+%----------------------------------------------------------------------------------------
+% 	HEADER
+%----------------------------------------------------------------------------------------
+
+% remove top header line
+\renewcommand{\headrulewidth}{0pt}
+
+%remove botttom header line
+\renewcommand{\footrulewidth}{0pt}
+
+%remove pagenum
+\renewcommand{\thepage}{}
+
+%remove section num
+\renewcommand{\thesection}{}
+
+%----------------------------------------------------------------------------------------
+% 	ARROW GRAPHICS in Tikz
+%----------------------------------------------------------------------------------------
+
+% a six pointed arrow poiting to the left
+\newcommand{\tzlarrow}{(0,0) -- (0.2,0) -- (0.3,0.2) -- (0.2,0.4) -- (0,0.4) -- (0.1,0.2) -- cycle;}
+
+% include the left arrow into a tikz picture
+% param1: fill color
+%
+\newcommand{\larrow}[1]
+{\begin{tikzpicture}[scale=0.58]
+	 \filldraw[fill=#1!100,draw=#1!100!black]  \tzlarrow
+ \end{tikzpicture}
+}
+
+% a six pointed arrow poiting to the right
+\newcommand{\tzrarrow}{ (0,0.2) -- (0.1,0) -- (0.3,0) -- (0.2,0.2) -- (0.3,0.4) -- (0.1,0.4) -- cycle;}
+
+% include the right arrow into a tikz picture
+% param1: fill color
+%
+\newcommand{\rarrow}
+{\begin{tikzpicture}[scale=0.7]
+	\filldraw[fill=sectcol!100,draw=sectcol!100!black] \tzrarrow
+ \end{tikzpicture}
+}
+
+
+
+%----------------------------------------------------------------------------------------
+%	custom sections
+%----------------------------------------------------------------------------------------
+
+% create a coloured box with arrow and title as cv section headline
+% param 1: section title
+%
+\newcommand{\cvsection}[1]
+{
+\colorbox{sectcol}{\mystrut \makebox[1\linewidth][l]{
+\larrow{bgcol} \hspace{-8pt} \larrow{bgcol} \hspace{-8pt} \larrow{bgcol} \textcolor{white}{\textbf{#1}}\hspace{4pt}
+}}\\
+}
+
+%create a coloured arrow with title as cv meta section section
+% param 1: meta section title
+%
+\newcommand{\metasection}[2]
+{
+\begin{tabular*}{1\textwidth}{p{2.4cm} p{11cm}}
+\larrow{bgcol}	\normalsize{\textcolor{sectcol}{#1}}&#2\\[12pt]
+\end{tabular*}
+}
+
+%----------------------------------------------------------------------------------------
+%	 CV EVENT
+%----------------------------------------------------------------------------------------
+
+% creates a stretched box as cv entry headline followed by two paragraphs about
+% the work you did
+% param 1:	event time i.e. 2014 or 2011-2014 etc.
+% param 2:	event name (what did you do?)
+% param 3:	institution (where did you work / study)
+% param 4:	what was your position
+% param 5:	some words about your contributions
+%
+\newcommand{\cvevent}[5]
+{
+\vspace{8pt}
+	\begin{tabular*}{1\textwidth}{p{2.3cm}  p{10.8cm} x{3.9cm}}
+ \textcolor{bgcol}{#1}& \textbf{#2} & \vspace{2.5pt}\textcolor{sectcol}{#3}
+
+	\end{tabular*}
+\vspace{-12pt}
+\textcolor{softcol}{\hrule}
+\vspace{6pt}
+	\begin{tabular*}{1\textwidth}{p{2.3cm} p{14.4cm}}
+&		 \larrow{bgcol}  #4\\[3pt]
+&		 \larrow{bgcol}  #5\\[6pt]
+	\end{tabular*}
+
+}
+
+% creates a stretched box as
+\newcommand{\cveventmeta}[2]
+{
+	\mbox{\mystrut \hspace{87pt}\textit{#1}}\\
+	#2
+}
+
+%----------------------------------------------------------------------------------------
+% CUSTOM STRUT FOR EMPTY BOXES
+%----------------------------------------- -----------------------------------------------
+\newcommand{\mystrut}{\rule[-.3\baselineskip]{0pt}{\baselineskip}}
+
+%----------------------------------------------------------------------------------------
+% CUSTOM LOREM IPSUM
+%----------------------------------------------------------------------------------------
+\newcommand{\lorem}
+{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus.}
+
+%============================================================================%
+%
+%	DOCUMENT CONTENT
+%
+%============================================================================%
+\begin{document}
+
+
+%use our custom fancy header definitions
+\pagestyle{fancy}
+
+
+%---------------------------------------------------------------------------------------
+%	TITLE HEADLINE
+%----------------------------------------------------------------------------------------
+\vspace{-20.55pt}
+
+% use this for multiple words like working titles etc.
+%\hspace{-0.25\linewidth}\colorbox{bgcol}{\makebox[1.5\linewidth][c]{\hspace{46pt}\HUGE{\textcolor{white}
+%{\textsc{Sudesh Acharya}} } \textcolor{sectcol}{\rule[-1mm]{1mm}{0.9cm}} \parbox[b]{5cm}{   \large{ 
+%\textcolor{white}{{Data Science/Analytics}}}\\
+% \large{ \textcolor{white}{{Resume}}}}
+%}}
+
+% use this for single words, e.g. CV or RESUME etc.
+\hspace{-0.25\linewidth}\colorbox{bgcol}{\makebox[1.5\linewidth][c]{\HUGE{\textcolor{white}
+{\textsc{Sudesh Acharya }} }}}
+
+
+%----------------------------------------------------------------------------------------
+%	HEADER IMAGE
+%----------------------------------------------------------------------------------------
+
+\begin{figure}[H]
+\begin{flushright}
+	\includegraphics[width=0.20\linewidth]{profile.png}	%trimming relative to image size!
+\end{flushright}
+\end{figure}
+
+
+%---------------------------------------------------------------------------------------
+%	META SECTION
+%----------------------------------------------------------------------------------------
+
+\vspace{-130pt}
+
+\metasection{Fields:}{\textbf{Software Development, Data Science, and Deep Learning.}}
+\metasection{Stacks:}{Python3, HTML5|CSS3|JS, MongoDB|MonetDB, Basic C++| Rust.}
+\vspace{5pt}
+\metasection{Utils:}{DjangoREST, Numpy, Pandas, Matplotlib, PyTorch, OpenCV, AWS|GCP,
+	Gymnasium, Linux, Git, Docker, ROS2, etc. }
+\metasection{Enjoys:}{Knowledge-exchange, Music, Learning new stuffs, Seasonal Hobbies. }
+\metasection{Languages:}{English : Fluent, German: Fluent, Hindi : Fluent, Nepali : Native}
+
+%---------------------------------------------------------------------------------------
+%	SUMMARAY (optional)
+%----------------------------------------------------------------------------------------
+\cvsection{Summary}\\
+Spirited Developer ready, to offer acquired Software(Instruction, Test-driven) and Machine Learning(Data-driven)
+development skills and experiences, to spend effort on exciting and fulﬁlling projects, to assist develop products,
+facilitate services, seeking to undertake such roles and work on innovative and SOTA solutions.
+
+
+\vspace{5pt}
+
+%============================================================================%
+%
+%	CV SECTIONS AND EVENTS (MAIN CONTENT)
+%
+%============================================================================%
+
+%---------------------------------------------------------------------------------------
+% Work Experience
+%----------------------------------------------------------------------------------------
+\cvsection{Experiences Timeline}
+
+\cvevent{2023.11-24.08}{Data Science Researcher Intern - Munich, Germany}{FfE e.V.}{Development of Cloud(GCP, AWS) Interface[API] for fluid Cloud-based Simulation Service. }{DRF based Django User Auth., Service Backend, Logging(structlog),  and Testing(PyTest) }
+
+
+
+\cvevent{2022.07-23.08}{API server Development with DjangoREST - Karlsruhe, Germany}{CloudFluid GmbH}{Development of Cloud(GCP, AWS) Interface[API] for fluid Cloud-based Simulation Service. }{DRF based Django User Auth., Service Backend, Logging(structlog),  and Testing(PyTest) }
+
+
+\cvevent{2021.10-22.03}{Data Analytics and Reporting - Rostock, Germany}{VestiFi GmbH}{Generation of Visualization(Matplotlib, Seaborn) and Reporting(LaTeX, Jinja). }{Extraction( MonetDB SQL), Transformation(Numpy), and Loading(MongoDB) pipeline for wifi radio pcaps.}
+
+\cvevent{2021.05-22.02 }{Lidar Data Analysis, and ETL - Kiel, Germany}{FuE FH Kiel GmbH}{Raw maritime 3D Lidar data collection and management within Kiel Förde}{Analysis and Transformation of raw Lidar data to several point cloud formats(.pcd, .npy)}
+
+\cvevent{2021.(05-06) }{NLP/NLU Development Internship - Munich, Germany}{ROKIN GmbH}{Document Classification(tagging) with BERT and Derivatives}{NLP based Model Development, Evaluation, Article prediction and Testing using Google Cloud Platform (GCP) }
+
+\cvevent{2017.(02-05) }{ODOO Module Programmer - Lalitpur, Nepal }{BI Solutions Pvt. Ltd.}{ODOO ERP and CRM Custom Module Development}{Python /ORM /MVC, PostgreSQL, Scrum/Kanban Project Mgmt.}
+
+%---------------------------------------------------------------------------------------
+% Academics
+%--------------------------------------------------------------------------------------
+
+\cvsection{Academic Timeline}
+
+
+
+\cvevent{2018 - mow}{Master's Degree}{FH Kiel, Germany}{MSc. Information Engineering ( Specialization : Intelligent Systems ) }{Statistical Machine/Deep Learning, Business Analytics, Cloud Computing, DevOps, Project Management, Requirement Engineering. etc. }
+
+%\textcolor{softcol}{\hrule}
+
+\cvevent{2012 - 2016}{Bachelor's Degree}{RGPV University, India}{Computer Science and Engineering}{Theory of Computation, Data Structures and Algorithms, Digital Circuits and System etc.}
+
+\vspace{43pt}
+\textcolor{softcol}{\hrule}
+\cvevent{2010 - 2012}{ High School}{Caribbean HSS, Nepal}{Major : Natural and Formal Science}{ Modern Physics, Biology, Chemistry, and Mathematics}
+
+
+\vspace{3pt}
+%--------------------------------------------------------------------------------------------------
+% Projects Undertaken
+%--------------------------------------------------------------------------------------------------
+
+\cvsection{Personal and Academic Projects}
+
+\vspace{3pt}
+
+\cvevent{2020 - 2021}{Exploration of Art Generation using Deep Generative Models }{PyTorch}{Exploration and Evaluation of Generative Models in Art Generation Domain.}{Progressive Implementaiton and Observation on (Unconditional and Conditional ) GANs}
+
+\cvevent{2020 - 2021}{Classification of Thoractic diseases using Deep Learning}{Keras | Tensorflow}{Implementation, Optimization and Evaluation on Custom CNNs.)}{Pre-training and Fine Tuning(Transfer Learning) using Densenet121 Architecture }
+
+%\textcolor{softcol}{\hrule}
+
+\cvevent{2019- 2020}{Time Series Analysis and Forecasting}{Python, R}{Time Series Analysis using Classical ML algorithms( Python/ R)}{Time Series Forecasting using Deep Learning Models(RNN/LSTM), Lib: FB-Prophet}
+%\textcolor{softcol}{\hrule}
+
+\cvevent{2019- 2020}{Model Selection,Data Exploration and Visualization}{Scikit-Learn}{High-dimensional Data Exploration: PCA, LDA, t-SNE, ISOMAP etc.}{Model Selection, Validation and Evaluation using criterias (AIC, BIC, MDL)}
+
+\cvevent{2018 - 2019}{Classical Machine Learning Implementation}{Scikit-Learn}{Clustering, Classification, Regression: Support Vectors, Perceptron, DecisionTree, KNN)}{Data: UCI banknote authentication, Segmentation, Mice Protein data Clustering, etc.}
+
+
+\vspace{3pt}
+
+
+%--------------------------------------------------------------------------------------------------
+% Certifications
+%--------------------------------------------------------------------------------------------------
+\cvsection{Certification Courses}
+
+\cvevent{2020 - 2021}{Python for Data Science, AI and Development }{IBM | Coursera}{Fundamentals of Python Programming for Analytics }{Data Analysis with Numpy,Pandas, Matplotlib, and Seaborn}
+
+\cvevent{2020 - 2021}{Deep Learning Specialization }{Coursera}{Deep Learning Fundamentals, Computer Vision, Sequence and Attention Models(NLP, NLU)}{Optimization, Hyperparameter Tune/Search, and Regularization.}
+
+
+%\cvevent{2022 }{ML Engineering for Production Specialization (ML-Ops)  }{Coursera}{ }{ }
+
+\cvevent{2020}{AI for Medical Diagnosis}{Deeplearning.ai}{Disease detection and classification using Convolutional Neural Networks }{Evaluation metrics, domain challenges with medical datasets}
+%
+%
+
+\textcolor{softcol}{\hrule}
+\textcolor{softcol}{\hrule}
+
+\vspace{4pt}
+%\emph{LinkedIn @: \textbf{\textit{https://www.linkedin.com/in/sudeshacharya/}}} \\
+\emph{Open Projectworks @: \textbf{\textit{https://github.com/mnpr-vcs}}} \\
+%\emph{work in progress site @: \textbf{\textit{https://sudesh.io}}}
+
+\textcolor{softcol}{\hrule}
+%\vspace{4pt}
+%---------------------------------------------------------------------------------------
+%	QR CODE
+%----------------------------------------------------------------------------------------
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=0.15\linewidth]{qrcode.png}	%trimming relative to image size!
+\end{center}
+\end{figure}
+
+
+%-------------------------------------------------------------------------------------------------
+% FOOTER (fancy footer cannot exceed linewidth)
+%--------------------------------------------------------------------------------------------------
+
+%\null
+\vspace*{\fill}
+\hspace{-0.25\linewidth}\colorbox{bgcol}{\makebox[1.5\linewidth][c]{ \small \textcolor{white}{***}}}
+
+%============================================================================%
+%
+%	DOCUMENT END
+%
+%============================================================================%
+\end{document}

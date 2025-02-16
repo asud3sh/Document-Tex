@@ -1,0 +1,378 @@
+%--------------------------------------------------------------------------------------%
+%                            _         ___,        _
+%   ()           |          | |       /   |       | |
+%   /\         __|   _   ,  | |      |    |   __  | |     __,   ,_          __,
+%  /  \|   |  /  |  |/  / \_|/ \     |    |  /    |/ \   /  |  /  |  |   | /  |
+% /(__/ \_/|_/\_/|_/|__/ \/ |   |_/   \__/\_/\___/|   |_/\_/|_/   |_/ \_/|/\_/|_/
+%                                                                       /|
+%                                                                       \|
+%  @Mnpr/Documents-Tex ( Cover Letter )
+%---------------------------------------------------------------------------------------%
+
+
+%============================================================================%
+%
+%	DOCUMENT DEFINITION
+%
+%============================================================================%
+
+\documentclass[11pt,A4]{article}
+
+%----------------------------------------------------------------------------------------
+%	ENCODING
+%----------------------------------------------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+%----------------------------------------------------------------------------------------
+%	LOGIC
+%----------------------------------------------------------------------------------------
+
+% provides \isempty test
+\usepackage{xifthen}
+
+%----------------------------------------------------------------------------------------
+%	FONT
+%----------------------------------------------------------------------------------------
+
+% some tex-live fonts
+
+\usepackage[defaultsans]{droidsans}
+%\usepackage[default]{comfortaa}
+%\usepackage{cmbright}
+%\usepackage[default]{raleway}
+%\usepackage{fetamont}
+%\usepackage[default]{gillius}
+%\usepackage[light,math]{iwona}
+%\usepackage[thin]{roboto}
+
+% set font default
+\renewcommand*\familydefault{\sfdefault}
+\usepackage[T1]{fontenc}
+
+% more font size definitions
+\usepackage{moresize}
+
+
+%----------------------------------------------------------------------------------------
+%	PAGE LAYOUT  DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+%debug page outer frames
+%\usepackage{showframe}
+
+%define page styles using geometry
+\usepackage[a4paper]{geometry}
+
+% for example, change the margins to 2 inches all round
+\geometry{top=1.75cm, bottom=-.6cm, left=1.5cm, right=1.5cm}
+
+%use customized header
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+%less space between header and content
+\setlength{\headheight}{-5pt}
+
+
+%indentation is zero
+\setlength{\parindent}{0mm}
+
+
+%customize entries left, center and right
+\lhead{}
+\chead{ \small{ \textcolor{sectcol}{\textbf{sudesh.contact@gmail.com}}  $\cdot$ +977 9765624237 $\cdot$ Pokhara-11, 33700, Gandaki, Nepal }}
+\rhead{}
+
+%----------------------------------------------------------
+%	TABLE /ARRAY DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+%for layouting tables
+\usepackage{multicol}
+\usepackage{multirow}
+
+%extended aligning of tabular cells
+\usepackage{array}
+
+\newcolumntype{x}[1]{%
+>{\raggedleft\hspace{0pt}}p{#1}}%
+
+
+%----------------------------------------------------------------------------------------
+%	GRAPHICS DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+%for header image
+\usepackage{graphicx}
+
+%for floating figures
+\usepackage{wrapfig}
+\usepackage{float}
+%\floatstyle{boxed}
+%\restylefloat{figure}
+
+%for drawing graphics
+\usepackage{tikz}
+\usetikzlibrary{shapes, backgrounds,mindmap, trees}
+
+
+%----------------------------------------------------------------------------------------
+%	Color DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+
+\usepackage{color}
+
+%accent color
+%\definecolor{sectcol}{RGB}{129,161,193}
+\definecolor{sectcol}{RGB}{0,0,0}
+
+%dark background color
+%\definecolor{bgcol}{RGB}{76,86,106}
+\definecolor{bgcol}{RGB}{0,0,0}
+
+%light background / accent color
+\definecolor{softcol}{RGB}{236,239,244}
+%\definecolor{softcol}{RGB}{0,0,0}
+
+%----------------------------------------------------------------------------------------
+% 	HEADER
+%----------------------------------------------------------------------------------------
+
+% remove top header line
+\renewcommand{\headrulewidth}{0pt}
+
+%remove botttom header line
+\renewcommand{\footrulewidth}{0pt}
+
+%remove pagenum
+\renewcommand{\thepage}{}
+
+%remove section num
+\renewcommand{\thesection}{}
+
+%----------------------------------------------------------------------------------------
+% 	ARROW GRAPHICS in Tikz
+%----------------------------------------------------------------------------------------
+
+% a six pointed arrow poiting to the left
+\newcommand{\tzlarrow}{(0,0) -- (0.2,0) -- (0.3,0.2) -- (0.2,0.4) -- (0,0.4) -- (0.1,0.2) -- cycle;}
+
+% include the left arrow into a tikz picture
+% param1: fill color
+%
+\newcommand{\larrow}[1]
+{\begin{tikzpicture}[scale=0.58]
+	 \filldraw[fill=#1!100,draw=#1!100!black]  \tzlarrow
+ \end{tikzpicture}
+}
+
+% a six pointed arrow poiting to the right
+\newcommand{\tzrarrow}{ (0,0.2) -- (0.1,0) -- (0.3,0) -- (0.2,0.2) -- (0.3,0.4) -- (0.1,0.4) -- cycle;}
+
+% include the right arrow into a tikz picture
+% param1: fill color
+%
+\newcommand{\rarrow}
+{\begin{tikzpicture}[scale=0.7]
+	\filldraw[fill=sectcol!100,draw=sectcol!100!black] \tzrarrow
+ \end{tikzpicture}
+}
+
+
+
+%----------------------------------------------------------------------------------------
+%	custom sections
+%----------------------------------------------------------------------------------------
+
+% create a coloured box with arrow and title as cv section headline
+% param 1: section title
+%
+\newcommand{\cvsection}[1]
+{
+\colorbox{sectcol}{\mystrut \makebox[1\linewidth][l]{
+\larrow{bgcol} \hspace{-8pt} \larrow{bgcol} \hspace{-8pt} \larrow{bgcol} \textcolor{white}{\textbf{#1}}\hspace{4pt}
+}}\\
+}
+
+%create a coloured arrow with title as cv meta section section
+% param 1: meta section title
+%
+\newcommand{\metasection}[2]
+{
+\begin{tabular*}{1\textwidth}{p{2.4cm} p{11cm}}
+\larrow{bgcol}	\normalsize{\textcolor{sectcol}{#1}}&#2\\[12pt]
+\end{tabular*}
+}
+
+%----------------------------------------------------------------------------------------
+%	 CV EVENT
+%----------------------------------------------------------------------------------------
+
+% creates a stretched box as cv entry headline followed by two paragraphs about
+% the work you did
+% param 1:	event time
+% param 2:	event name
+% param 3:	institution
+% param 4:	position
+% param 5:	contributions
+%
+\newcommand{\cvevent}[5]
+{
+\vspace{8pt}
+	\begin{tabular*}{1\textwidth}{p{2.3cm}  p{10.8cm} x{3.9cm}}
+ \textcolor{bgcol}{#1}& \textbf{#2} & \vspace{2.5pt}\textcolor{sectcol}{#3}
+
+	\end{tabular*}
+\vspace{-12pt}
+\textcolor{softcol}{\hrule}
+\vspace{6pt}
+	\begin{tabular*}{1\textwidth}{p{2.3cm} p{14.4cm}}
+&		 \larrow{bgcol}  #4\\[3pt]
+&		 \larrow{bgcol}  #5\\[6pt]
+	\end{tabular*}
+
+}
+
+% creates a stretched box as
+\newcommand{\cveventmeta}[2]
+{
+	\mbox{\mystrut \hspace{87pt}\textit{#1}}\\
+	#2
+}
+
+%----------------------------------------------------------------------------------------
+% CUSTOM STRUT FOR EMPTY BOXES
+%----------------------------------------- -----------------------------------------------
+\newcommand{\mystrut}{\rule[-.3\baselineskip]{0pt}{\baselineskip}}
+
+%----------------------------------------------------------------------------------------
+% CUSTOM LOREM IPSUM
+%----------------------------------------------------------------------------------------
+\newcommand{\lorem}
+{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus.}
+
+
+
+%============================================================================%
+%
+%	DOCUMENT CONTENT
+%
+%============================================================================%
+
+\begin{document}
+
+%use our custom fancy header definitions
+\pagestyle{fancy}
+
+
+%---------------------------------------------------------------------------------------
+%	TITLE HEADLINE
+%----------------------------------------------------------------------------------------
+\vspace{-20.55pt}
+
+% use this for multiple words like working titles etc.
+%\hspace{-0.25\linewidth}\colorbox{bgcol}{\makebox[1.5\linewidth][c]{\hspace{46pt}\HUGE{\textcolor{white}{\textsc{Sudesh Acharya}} } \textcolor{sectcol}{\rule[-1mm]{1mm}{0.9cm}} \parbox[b]{5cm}{   \large{ \textcolor{white}{{Data Science}}}\\
+% \large{ \textcolor{white}{{Resume}}}}
+%}}
+
+% use this for single words, e.g. CV or RESUME etc.
+\hspace{-0.25\linewidth}\colorbox{bgcol}{\makebox[1.5\linewidth][c]{\HUGE{\textcolor{white}{\textsc{Sudesh Acharya}} } }}
+
+
+%----------------------------------------------------------------------------------------
+%	HEADER IMAGE
+%----------------------------------------------------------------------------------------
+
+
+
+%\vspace{-136pt}
+%\hspace{0.75\linewidth}
+%\includegraphics[width=103pt]{qrcode}
+%\normalsize
+%\vspace{88pt}
+
+%---------------------------------------------------------------------------------------
+%	META SECTION
+%----------------------------------------------------------------------------------------
+
+\vspace{60pt}
+{\textbf{Dear Recruiter/*in,}}\\
+
+{Human Resource}\\
+{Department of Radiology,}\\
+{Earth}\\
+
+\vspace{20pt}
+\begin{center}
+\textbf{Subject :} \textit{ Application for Developer: Remote  }
+\end{center}
+
+\vspace{10pt}
+
+
+\begin{flushright}
+{Date: 11/01/2025}
+\end{flushright}
+
+\vspace{10pt}
+%---------------------------------------------------------------------------------------
+%	SUMMARAY (optional)
+%----------------------------------------------------------------------------------------
+
+\vspace{10pt}
+
+\textbf{Who am I ?}
+\vspace{5pt}
+\textcolor{softcol}{\hrule}
+\vspace{5pt}
+
+Currently pursuing my M.S. in Information Engineering at Fachhochschule Kiel, i am fascinated with the idea of extracting insights from raw information to solve real-world problems using Analytical/Learning systems and thus plan to graduate with specialization of "intelligent systems". I believe in knowledge sharing, constructive criticism, continuous/self learning, and idealize my career in a curious, and collaborative space.
+\vspace{15pt}
+
+\textbf{Why me?}
+\vspace{5pt}
+\textcolor{softcol}{\hrule}
+\vspace{5pt}
+
+I have hands-on experience with modeling, testing, and optimization of statistical as well as deep learning algorithms within domains such as Computer Vision, NLP, and Data Science(ETL, Analytics and Visualization). After undertaking several organizational, personal, and academic development projects(@Ref C.V.) in different environments, i am confident that i have right skill-sets, experience, and motivation(to quickly learn missing skills) to fulfill the roles and responsibilities in a team or alone. 
+\vspace{15pt}
+
+\textbf{Why X ?}
+\vspace{5pt}
+\textcolor{softcol}{\hrule}
+\vspace{5pt}
+
+
+Since X  is providing small but modern workspace and ideal atmosphere to work on machine learning application to develop for and within the role, working on state of the art solutions. A possibility to work remotely as well is nice for me. A complelling role to work within diverse topics. A perfect opportunity for collaboration, learning, and growing with talented team from diverse backgrounds.
+
+
+\vspace{30pt}
+I have attached my CV for your review, and will be happy to provide more information to introduce myself better. Looking forward to hear form you soon.
+
+\vspace{25pt}
+\begin{flushleft}
+{Best Greerings,}\\
+\vspace{7pt}
+{Sudesh Acharya}\\
+
+
+\end{flushleft}
+
+
+%-------------------------------------------------------------------------------------------------
+% FOOTER (fancy footer cannot exceed linewidth)
+%--------------------------------------------------------------------------------------------------
+
+\null
+\vspace*{\fill}
+\hspace{-0.25\linewidth}\colorbox{bgcol}{\makebox[1.5\linewidth][c]{\mystrut \small \textcolor{white}{***}}}
+
+
+%============================================================================%
+%
+%	DOCUMENT END
+%
+%============================================================================%
+\end{document}
